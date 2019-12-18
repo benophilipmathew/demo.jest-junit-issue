@@ -1,29 +1,19 @@
-# README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+* Recently I was working on azure release pipeline and found that my tests are not exiting while running it through npx
+* Later I found jest-junit reporter is causing this issue
+* npx run with a empty package.json file will work as expected
 
-### What is this repository for? ###
+Note - This is only happening with jest-junit package if we run without jest-junit it will run fine
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### How to reproduce ###
 
-### How do I get set up? ###
+* npm i jest jest-junit
+* npx jest --maxWorkers=1 --forceExit
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* expected - test execution should stop after successful run
+* actual - test execution will never stop
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+### How to fix ###
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* just add a empty (i.e. {}) package.json in working folder and it will work fine
